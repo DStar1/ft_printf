@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 17:24:34 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/22 21:57:07 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/25 19:51:37 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,17 @@
 ** 
 */
 
-int		ft_printf(void)
+int		ft_printf(char *fmt, ...)
 {
-	printf("%d", printf("hello"));
-	return (0);
+	t_print ptf;
+
+	ptf.ret = 0;
+	ptf.fd = 1;
+	ptf.fmt = (char*)fmt;
+	va_start(ptf.ap, fmt);
+	parse(&ptf);
+//	va_copy(ap2, ap);
+
+	va_end(ptf.ap);
+	return (ptf.ret);
 }

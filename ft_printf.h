@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 16:15:38 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/22 20:13:08 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/25 20:41:46 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,28 @@
 # define FT_PRINTF_H
 
 # include "libft/libft.h"
+# include <stdarg.h>
+# include <stdbool.h> //find out if this is okay for the booleans
+
+typedef struct		s_print
+{
+	int				ret;
+	int				fd;
+	char			*fmt;
+	va_list			ap;
+}					t_print;
+
+typedef struct		s_flags
+{
+	bool			hash;
+	bool			zero;
+	bool			space;
+	bool			neg;
+	bool			pos;
+	bool			perc;
+	char			res;
+	int				i;
+}					t_flags;
 
 typedef struct		s_master
 {
@@ -23,6 +45,7 @@ typedef struct		s_master
 	struct s_master	*next;
 }					t_master;
 
-int ft_printf();
+int ft_printf(char *fmt, ...);
+void    parse(t_print *ptf);
 
 #endif

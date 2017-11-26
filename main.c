@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 17:26:06 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/22 20:14:36 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/25 20:50:46 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int		main(void)
 {
-	ft_printf();
+	int i = 0;
+	ft_printf("head low %+0d I am someone %p", i, "else");
 	return (0);
 }
