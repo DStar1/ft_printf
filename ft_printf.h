@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 16:15:38 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/25 20:41:46 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/25 23:09:39 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct		s_print
 	int				fd;
 	char			*fmt;
 	va_list			ap;
+	va_list			ap2;
 }					t_print;
 
 typedef struct		s_flags
@@ -45,7 +46,12 @@ typedef struct		s_master
 	struct s_master	*next;
 }					t_master;
 
-int ft_printf(char *fmt, ...);
-void    parse(t_print *ptf);
+int		ft_printf(char *fmt, ...);
+void	parse(t_print *ptf);
+void	ft_string(t_print *print, t_flags *flags);
+void	ft_char(t_print *print, t_flags *flags);
+void	ft_int(t_print *print, t_flags *flags);
+void	ft_unsigned_int(t_print *print, t_flags *flags);
+void	ft_l_char(t_print *print, t_flags *flags);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 17:26:06 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/25 20:50:46 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/25 23:23:24 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 int		main(void)
 {
 	int i = 0;
-	ft_printf("head low %+0d I am someone %p", i, "else");
+	int f = ft_printf("my name is %s and I am someone that like!\n", "Harrison", 'b');
+	ft_putnbr(f);
+	//printf("\n%d\n", printf("yo %s yo", "hello", "hello", "hello"));
+		//ft_printf("my name is %s and I am someone that %C like!", "Harrison", L'β');
 	return (0);
 }

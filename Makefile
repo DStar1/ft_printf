@@ -6,7 +6,7 @@
 #    By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/22 20:09:46 by hasmith           #+#    #+#              #
-#    Updated: 2017/11/25 19:18:22 by hasmith          ###   ########.fr        #
+#    Updated: 2017/11/25 21:56:22 by hasmith          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,7 @@ LIBFT = libft/ft_bzero.c \
 	   libft/ft_lstmap.c
 
 PRINTF = 	parse.c \
+			string.c \
 			ft_printf.c
 
 LIB = libftprintf.a

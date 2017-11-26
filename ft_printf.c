@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 17:24:34 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/25 19:51:37 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/25 23:23:33 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 ** x: hex integer lower case
 ** X: hex capital
 ** c: int converted to unsigned char, char is written
-** C: c with 1 modifier
+** C: c with 1 modifier wchar
 ** %%: no args?
 ** FLAGS
 ** #: 
@@ -55,13 +55,15 @@ int		ft_printf(char *fmt, ...)
 {
 	t_print ptf;
 
-	ptf.ret = 0;
+	ptf.ret = 1;
 	ptf.fd = 1;
 	ptf.fmt = (char*)fmt;
 	va_start(ptf.ap, fmt);
+	va_copy(ptf.ap2, ptf.ap);
 	parse(&ptf);
-//	va_copy(ap2, ap);
+
 
 	va_end(ptf.ap);
+	va_end(ptf.ap2);
 	return (ptf.ret);
 }
