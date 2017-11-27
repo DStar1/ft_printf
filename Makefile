@@ -6,7 +6,7 @@
 #    By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/22 20:09:46 by hasmith           #+#    #+#              #
-#    Updated: 2017/11/25 21:56:22 by hasmith          ###   ########.fr        #
+#    Updated: 2017/11/26 20:50:30 by hasmith          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,9 @@ LIBFT = libft/ft_bzero.c \
 	   libft/ft_lstdel.c \
 	   libft/ft_lstadd.c \
 	   libft/ft_lstiter.c \
+	   libft/ft_intlen.c \
+	   libft/ft_atoi_base.c \
+	   libft/ft_power.c \
 	   libft/ft_lstmap.c
 
 PRINTF = 	parse.c \

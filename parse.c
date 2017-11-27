@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 19:05:59 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/25 23:20:46 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/26 20:56:49 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void		apply_functs(t_print *ptf, t_flags *flags)
 	((flags->res == 'd') || (flags->res == 'i')) ? ft_int(ptf, flags)/*printf("int\n")*/ : 0; //ft_putnbr();
 	(flags->res == 'D') ? printf("i/d with l mod\n") : 0;
 	(flags->res == 'p') ? printf("void * pointer printed in hex same as '%#x'\n") : 0;
-	(flags->res == 'o') ? printf("octal\n") : 0;
+	(flags->res == 'o') ? ft_octal(ptf, flags)/*printf("octal\n")*/ : 0;
 	(flags->res == 'O') ? printf("o with l mod\n") : 0;
 	(flags->res == 'u') ? ft_unsigned_int(ptf, flags)/*printf("unsigned int\n")*/ : 0;
 	(flags->res == 'U') ? printf("u with l mod\n") : 0;
@@ -46,9 +46,11 @@ static void		set_flags(t_flags *flags)
 void			parse(t_print *ptf)
 {
 	int		i;
+	int		j;
 	t_flags	flags;
 
 	i = 0;
+	j = 1;
 	while (ptf->fmt[i])
 	{
 		set_flags(&flags);
@@ -56,14 +58,15 @@ void			parse(t_print *ptf)
 		{
 			while (ptf->fmt[i] && (ptf->fmt[i] == '%' || ptf->fmt[i] == '#' || ptf->fmt[i] == '+' || ptf->fmt[i] == '-' || ptf->fmt[i] == '0' || ptf->fmt[i] == ' '))
 			{
-				IF(ptf->fmt[i] == '%', flags.perc = true);
-				IF(ptf->fmt[i] == '#', flags.hash = true);
-				IF(ptf->fmt[i] == '+', flags.pos = true);
-				IF(ptf->fmt[i] == '-', flags.neg = true);
-				IF(ptf->fmt[i] == '0', flags.zero = true);
-				IF(ptf->fmt[i] == ' ', flags.space = true);
+				//all in order starting from 1
+				IF(ptf->fmt[i] == '%', flags.perc = j++);
+				IF(ptf->fmt[i] == '#', flags.hash = j++);
+				IF(ptf->fmt[i] == '+', flags.pos = j++);
+				IF(ptf->fmt[i] == '-', flags.neg = j++);
+				IF(ptf->fmt[i] == '0', flags.zero = j++);
+				IF(ptf->fmt[i] == ' ', flags.space = j++);
 				
-				//printf("flag = %c\n", ptf->fmt[i]);
+				//printf("flag = %c perc = %d\n", ptf->fmt[i], flags.zero);
 				i++;
 			}
 			if (ptf->fmt[i])
