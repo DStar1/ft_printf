@@ -6,13 +6,13 @@
 #    By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/22 20:09:46 by hasmith           #+#    #+#              #
-#    Updated: 2017/11/26 20:50:30 by hasmith          ###   ########.fr        #
+#    Updated: 2017/11/27 20:56:41 by hasmith          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_printf
+LIB = ft_printf.a
 
-LIBFT = libft/ft_bzero.c \
+libft = libft/ft_bzero.c \
 	   libft/ft_atoi.c \
 	   libft/ft_itoa.c \
 	   libft/ft_isalpha.c \
@@ -78,13 +78,15 @@ PRINTF = 	parse.c \
 			string.c \
 			ft_printf.c
 
-LIB = libftprintf.a
+NAME = libftprintf.a
 
 MAIN = main.c
 
+EXE = ft_printf
+
 TEST = <argv[1]>
 
-SRC = $(LIBFT) $(PRINTF)
+SRC = $(PRINTF)
 
 FLAGS = -Wall -Werror -Wextra
 
@@ -92,26 +94,28 @@ all: $(NAME)
 
 # add $(FALGS) after all gcc
 $(NAME):
-#	make all -C libft
+	make all -C libft
 	gcc -g -c $(SRC)
-	ar rc $(LIB) *.o
-	ranlib $(LIB)
-#	gcc -g -o $(NAME) $(LIB)
+	ar rcs $(LIB) *.o
+	ar -x libft/libft.a
+	ar -x $(LIB)
+	ar rcs $(NAME) *.o
+	rm $(LIB) __.*
 
 cmain:
 	make re
-	gcc -g -o $(NAME) $(LIB) $(MAIN)
+	gcc -g -o $(EXE) $(NAME) $(MAIN)
 	make clean
-	./$(NAME)
+	./$(EXE)
 
 clean:
 	/bin/rm -f *.o
 	make clean -C libft
-	/bin/rm -f $(LIB)
+#	/bin/rm -f $(NAME)
 
 fclean: clean
-#	make fclean -C libft
-	make clean -C libft #take out after
+	make fclean -C libft
+#	make clean -C libft #take out after
 	/bin/rm -f $(NAME)
 
 re: fclean all

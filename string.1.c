@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 21:00:43 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/28 00:46:19 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/28 00:34:13 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,39 +53,45 @@ void    ft_char(t_print *print, t_flags *flags)
 void    ft_int(t_print *print, t_flags *flags)
 {
 	int len;
+	int nlen;
 	int neg;
 
-	len = 0;
-	neg = 1;
+	neg = 0;
+	nlen = 0;
 	print->data.i = va_arg(print->ap, int);
-	if (print->data.i < 0 && flags->space == 0) //manipulate these for changes
+	IF(print->data.i < 0, neg = -1);
+	if (neg == -1 && flags->space == 0) //manipulate these for changes
 	{
-		len = 1;
+		len++;
 		print->data.i *= -1;
 		neg = -1;
-		//flags->width--;
+		flags->width--;
 		ft_putchar('-');
 	}
 	else if (flags->pos > 0 && print->data.i >= 0 && flags->space == 0) //manipulate these for changes
 	{
+		len++;
 		ft_putchar('+');
 		flags->width--;
 	}
-	len = len + ft_intlen(print->data.i);
+	len = ft_intlen(print->data.i);
 	(flags->neg == 0) ? fill(flags, print, len) : 0;
-	// if (neg == -1 && flags->space > 0) //manipulate these for changes
-	// {
-	// 	len++;
-	// 	ft_putchar('-');
-	// }
-	if (flags->pos > 0 && print->data.i >= 0 && flags->space > 0) //manipulate these for changes
+	if (neg == -1 && flags->space > 0) //manipulate these for changes
 	{
+		len++;
+		flags->width--;
+		ft_putchar('-');
+	}
+	else if (flags->pos > 0 && flags->space > 0) //manipulate these for changes
+	{
+		len++;
 		ft_putchar('+');
 		flags->width--;
 	}
 	ft_putnbr(print->data.i);
+	//flags->width -= nlen;
 	(flags->neg > 0) ? fill(flags, print, len) : 0;
-	IFELSE((flags->width == 0), print->ret += len, print->ret += flags->width); //add 2 to account for spaces added (maybe not right)
+	IFELSE((flags->width == 0), print->ret += len, print->ret += flags->width + 1); //add 2 to account for spaces added (maybe not right)
 	//print->ret += flags->width;// + 2;
 	return ;
 }

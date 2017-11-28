@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 17:24:34 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/26 18:48:20 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/27 23:32:31 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,42 @@
 int		ft_printf(char *fmt, ...)
 {
 	t_print ptf;
+	t_flags	flags;
 
-	ptf.ret = 1;
+	ptf.ret = 0;
 	ptf.fd = 1;
 	ptf.fmt = (char*)fmt;
 	va_start(ptf.ap, fmt);
-	parse(&ptf);
-
-
+	ptf.i = 0;
+	while (ptf.fmt[ptf.i])
+	{
+		if (ptf.fmt[ptf.i] == '%')
+		{
+			if (ptf.fmt[ptf.i + 1] && (ptf.fmt[ptf.i + 1] == '%'))
+			{
+				write(1, &ptf.fmt[ptf.i], 1);
+				ptf.i += 2;
+				ptf.ret += 2;
+			}
+			else
+			{
+				parse(&ptf, &flags);
+				//(ptf.fmt[ptf.i + 2]) ? ptf.ret += 1 : 0;
+			}
+		}
+		//else
+			//ptf.ret++;
+		if (!ptf.fmt[ptf.i])
+			break ;
+		else //if (ptf.fmt[ptf.i] && ptf.fmt[ptf.i + 1])
+		{
+				ft_putchar((ptf.fmt[ptf.i]));
+				ptf.ret++;
+		}
+		
+		ptf.i++;
+	}
+	//printf("\n%d, res = %c\n", flags.zn, flags.res);
 	va_end(ptf.ap);
 	return (ptf.ret);
 }

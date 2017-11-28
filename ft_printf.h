@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 16:15:38 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/26 20:48:00 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/27 20:45:20 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef union
 typedef struct		s_print
 {
 	int				ret;
+	int				i;
 	int				fd;
 	char			*fmt;
 	va_list			ap;
@@ -51,11 +52,17 @@ typedef struct		s_print
 typedef struct		s_flags
 {
 	int			hash;
+	int			hn;
 	int			zero;
+	int			zn;
 	int			space;
+	int			sn;
 	int			neg;
+	int			nn;
 	int			pos;
+	int			pn;
 	int			perc;
+	int 		width;
 	char			res;
 	int				i;
 }					t_flags;
@@ -69,7 +76,7 @@ typedef struct		s_master
 }					t_master;
 
 int		ft_printf(char *fmt, ...);
-void	parse(t_print *ptf);
+void	parse(t_print *ptf, t_flags *flags);
 void	ft_string(t_print *print, t_flags *flags);
 void	ft_char(t_print *print, t_flags *flags);
 void	ft_int(t_print *print, t_flags *flags);
