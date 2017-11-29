@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/28 20:53:44 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/28 22:07:20 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/29 00:01:57 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 void	data(t_print *print, t_flags *flags)
 {
 	if (flags->h)
-		print->data.i = (unsigned int)va_arg(print->ap, unsigned short);
+		print->data.super_u = (unsigned int)va_arg(print->ap, unsigned short);
 	else if (flags->hh)
-		print->data.i = (unsigned int)va_arg(print->ap, unsigned char);
+		print->data.super_u = (unsigned int)va_arg(print->ap, unsigned char);
 	else if (flags->l)
-		print->data.i = va_arg(print->ap, unsigned long);
+		print->data.super_u = va_arg(print->ap, unsigned long);
 	else if (flags->ll)
-		print->data.i = va_arg(print->ap, unsigned long long);
+		print->data.super_u = va_arg(print->ap, unsigned long long);
 	else if (flags->j)
-		print->data.i = va_arg(print->ap, uintmax_t);
+		print->data.super_u = va_arg(print->ap, uintmax_t);
 	else if (flags->z)
-		print->data.i = va_arg(print->ap, size_t);
+		print->data.super_u = va_arg(print->ap, size_t);
 }
 
 void	ft_hex(t_print *print, t_flags *flags, int cap)
@@ -42,7 +42,7 @@ void	ft_hex(t_print *print, t_flags *flags, int cap)
 		}
 		if (flags->zero)
 			fill(flags, print, '0');
-		ft_puthex(print->data.i, print, cap); //add the is capital/double/more
+		ft_puthex(print->data.super_u, print, cap); //add the is capital/double/more
 		if (!flags->zero)
 			fill(flags, print, ' ');
 	}
@@ -54,7 +54,7 @@ void	ft_hex(t_print *print, t_flags *flags, int cap)
 			ft_putstr("0x");
 			flags->len += 2;
 		}
-		ft_puthex(print->data.i, print, cap);
+		ft_puthex(print->data.super_u, print, cap);
 	}
 	IFELSE((flags->width == 0), print->ret += flags->len, print->ret += flags->width);
 }
