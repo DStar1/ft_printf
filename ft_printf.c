@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 17:24:34 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/27 23:32:31 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/28 21:04:05 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,26 @@
 ** precision: 
 ** 
 */
+
+void	fill(t_flags *flags, t_print *ptf, char c)
+{
+	int i;
+	//char c;
+	int nb;
+
+	i = 0;
+	nb = 0;
+	//c = ' ';
+	if (!flags->neg && flags->zero > flags->neg) //sort the priority here
+		c = '0';
+	while (i < flags->width - flags->intlen)
+	{
+		write(1, &c, 1);
+		flags->len++;
+		i++;
+	}
+	return ;
+}
 
 int		ft_printf(char *fmt, ...)
 {

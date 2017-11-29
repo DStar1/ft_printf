@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 16:15:38 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/27 20:45:20 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/28 21:47:21 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "libft/libft.h"
 # include <stdarg.h>
 # include <stdbool.h> //find out if this is okay for the booleans
+
+#define HEX "0123456789abcdef0123456789ABCDEF"
 
 typedef union
 {
@@ -52,17 +54,20 @@ typedef struct		s_print
 typedef struct		s_flags
 {
 	int			hash;
-	int			hn;
 	int			zero;
-	int			zn;
 	int			space;
-	int			sn;
 	int			neg;
-	int			nn;
 	int			pos;
-	int			pn;
 	int			perc;
 	int 		width;
+	int			len;
+	int			intlen;
+	int			l;
+	int			ll;
+	int			h;
+	int			hh;
+	int			j;
+	int			z;
 	char			res;
 	int				i;
 }					t_flags;
@@ -83,5 +88,9 @@ void	ft_int(t_print *print, t_flags *flags);
 void	ft_unsigned_int(t_print *print, t_flags *flags);
 void	ft_l_char(t_print *print, t_flags *flags);
 void    ft_octal(t_print *print, t_flags *flags);
+void	fill(t_flags *flags, t_print *ptf, char c);
+void    ft_int(t_print *print, t_flags *flags);
+void    ft_puthex(uintmax_t nb, t_print *print, int cap);
+void    ft_hex(t_print *print, t_flags *flags, int cap);
 
 #endif

@@ -6,31 +6,11 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 21:00:43 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/28 00:46:19 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/28 20:52:56 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void	fill(t_flags *flags, t_print *ptf, int len)
-{
-	int i;
-	char c;
-	int nb;
-
-	i = 0;
-	nb = 0;
-	c = ' ';
-	if (!flags->neg && flags->zero > flags->neg) //sort the priority here
-		c = '0';
-	while (i < flags->width - len)
-	{
-		write(1, &c, 1);
-		//ptf->ret++;
-		i++;
-	}
-	return ;
-}
 
 //remember to add the size
 
@@ -47,46 +27,6 @@ void    ft_char(t_print *print, t_flags *flags)
 	print->data.c = va_arg(print->ap, int);
 	ft_putchar(print->data.c);
 	print->ret += 1;
-	return ;
-}
-
-void    ft_int(t_print *print, t_flags *flags)
-{
-	int len;
-	int neg;
-
-	len = 0;
-	neg = 1;
-	print->data.i = va_arg(print->ap, int);
-	if (print->data.i < 0 && flags->space == 0) //manipulate these for changes
-	{
-		len = 1;
-		print->data.i *= -1;
-		neg = -1;
-		//flags->width--;
-		ft_putchar('-');
-	}
-	else if (flags->pos > 0 && print->data.i >= 0 && flags->space == 0) //manipulate these for changes
-	{
-		ft_putchar('+');
-		flags->width--;
-	}
-	len = len + ft_intlen(print->data.i);
-	(flags->neg == 0) ? fill(flags, print, len) : 0;
-	// if (neg == -1 && flags->space > 0) //manipulate these for changes
-	// {
-	// 	len++;
-	// 	ft_putchar('-');
-	// }
-	if (flags->pos > 0 && print->data.i >= 0 && flags->space > 0) //manipulate these for changes
-	{
-		ft_putchar('+');
-		flags->width--;
-	}
-	ft_putnbr(print->data.i);
-	(flags->neg > 0) ? fill(flags, print, len) : 0;
-	IFELSE((flags->width == 0), print->ret += len, print->ret += flags->width); //add 2 to account for spaces added (maybe not right)
-	//print->ret += flags->width;// + 2;
 	return ;
 }
 

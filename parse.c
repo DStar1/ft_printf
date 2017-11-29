@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 19:05:59 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/27 23:10:39 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/28 21:58:29 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static void		apply_functs(t_print *ptf, t_flags *flags)
 	(flags->res == 'O') ? printf("o with l mod\n") : 0;																		//unfinished
 	(flags->res == 'u') ? ft_unsigned_int(ptf, flags)/*printf("unsigned int\n")*/ : 0; 										//unfinished
 	(flags->res == 'U') ? printf("u with l mod\n") : 0;																		//unfinished
-	(flags->res == 'x') ? printf("hex lower case\n") : 0; //ft_itoa_base(16) lowercase;										//unfinished
-	(flags->res == 'X') ? printf("hex upper case\n") : 0; //ft_itoa_base(16) capital;										//unfinished
+	(flags->res == 'x') ? ft_hex(ptf, flags, 0)/*printf("hex lower case\n")*/ : 0; //ft_itoa_base(16) lowercase;										//unfinished
+	(flags->res == 'X') ? ft_hex(ptf, flags, 0)/*printf("hex upper case\n")*/ : 0; //ft_itoa_base(16) capital;										//unfinished
 	(flags->res == 'c') ? ft_char(ptf, flags)/*printf("int converted to char\n")*/ : 0;										//finished
 	(flags->res == 'C') ? ft_l_char(ptf, flags)/*printf("c with l mod\n")*/ : 0;
 	(flags->res == '%') ? printf("perc with width\n") : 0;											//unfinished
@@ -41,6 +41,12 @@ static void		set_flags(t_flags *flags)
 	flags->pos = false;
 	flags->perc = false;
 	flags->width = 0;
+	flags->l = 0;
+	flags->ll = 0;
+	flags->hh = 0;
+	flags->h = 0;
+	flags->j = 0;
+	flags->z = 0;
 	//flags->i = 0;
 }
 
@@ -65,20 +71,28 @@ void			set_width(t_flags *flags, t_print *ptf)
 
 
 //add all flags before identifier
-void	before_flags(t_flags *flags, t_print *ptf)
+int	check_flags(t_flags *flags, t_print *ptf)
 {
-	(flags->res == 'd') ? fill(flags, ptf) : 0;
-	return ;
+	if (ptf->fmt[ptf->i] == '#' || ptf->fmt[ptf->i] == '+' ||
+		ptf->fmt[ptf->i] == '-' || ptf->fmt[ptf->i] == '0' ||
+		ptf->fmt[ptf->i] == ' ')
+		return 1;
+	if (ptf->fmt[ptf->i] == 'l' || ptf->fmt[ptf->i] == 'h' ||
+		ptf->fmt[ptf->i] == 'j' || ptf->fmt[ptf->i] == 'z')
+		return 1;
+	return (0);
 }
 
 void			parse(t_print *ptf, t_flags *flags)
 {
 	int		j;
+	int		mod;
 
 	j = 1;
+	mod = 1;
 	set_flags(flags);
 	ptf->i++;
-	while (ptf->fmt[ptf->i] && (ptf->fmt[ptf->i] == '#' || ptf->fmt[ptf->i] == '+' || ptf->fmt[ptf->i] == '-' || ptf->fmt[ptf->i] == '0' || ptf->fmt[ptf->i] == ' '))
+	while (ptf->fmt[ptf->i] && (check_flags(flags, ptf)))
 	{
 		//all in order starting from 1
 		IF(ptf->fmt[ptf->i] == '#', flags->hash = j++);
@@ -87,6 +101,12 @@ void			parse(t_print *ptf, t_flags *flags)
 		IF(ptf->fmt[ptf->i] == '0', flags->zero = j++);
 		IF(ptf->fmt[ptf->i] == ' ', flags->space = j++);
 		//all_flags(flags, 1);
+		IF(ptf->fmt[ptf->i] == 'l', flags->l = mod++);
+		IFYZ(mod == 2, (flags->l = 0), (flags->ll = 1));
+		IF(ptf->fmt[ptf->i] == 'h', flags->h = mod++);
+		IFYZ(mod == 2, (flags->h = 0), (flags->hh = 1));
+		IF(ptf->fmt[ptf->i] == 'j', flags->j = mod++);
+		IF(ptf->fmt[ptf->i] == 'z', flags->z = mod++);
 
 		//printf("flag = %c perc = %d\n", ptf->fmt[ptf->i], flags->space);
 		ptf->i++;
@@ -97,12 +117,6 @@ void			parse(t_print *ptf, t_flags *flags)
 		flags->res = ptf->fmt[ptf->i];
 		ptf->i++;
 	}
-	//before_flags(flags, ptf);
 	apply_functs(ptf, flags);
-//	after_flags(flags, ptf);
-		//ft_printf("num spaces = %d\n", flags->sn);
-	//set_flags(flags);
-	//printf("res = %c\n", ptf->fmt[ptf->i]);
-		//ptf->i++;
 	return ;
 }

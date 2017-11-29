@@ -6,11 +6,13 @@
 #    By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/22 20:09:46 by hasmith           #+#    #+#              #
-#    Updated: 2017/11/27 20:56:41 by hasmith          ###   ########.fr        #
+#    Updated: 2017/11/28 23:54:03 by hasmith          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 LIB = ft_printf.a
+
+GIT = "unfinished"
 
 libft = libft/ft_bzero.c \
 	   libft/ft_atoi.c \
@@ -76,6 +78,9 @@ libft = libft/ft_bzero.c \
 
 PRINTF = 	parse.c \
 			string.c \
+			ft_int.c \
+			ft_puthex.c \
+			ft_hex.c \
 			ft_printf.c
 
 NAME = libftprintf.a
@@ -107,6 +112,11 @@ cmain:
 	gcc -g -o $(EXE) $(NAME) $(MAIN)
 	make clean
 	./$(EXE)
+
+git:
+	git add *
+	git commit -m $(GIT)
+	git push
 
 clean:
 	/bin/rm -f *.o

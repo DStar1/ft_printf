@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 17:26:06 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/28 00:45:03 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/28 21:18:24 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		main(void)
 
 	printf("\npos = %d\n", ft_printf("%3d", -4));
 	printf("\npos = %d\n", printf("%3d", -4));
-
+	//ft_puthex(-4294967296, 1);
 	//printf("\n%u\n", 0x80000000);
 	//ft_hextoi("80");
 	//printf("\n%o\n", 0x80);
