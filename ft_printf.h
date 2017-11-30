@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 16:15:38 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/29 17:54:53 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/29 22:01:32 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "libft/libft.h"
 # include <stdarg.h>
-# include <stdbool.h> //find out if this is okay for the booleans
 
 #define HEX "0123456789abcdef0123456789ABCDEF"
 
@@ -95,5 +94,7 @@ void    ft_hex(t_print *print, t_flags *flags, int cap);
 void    ft_hexlen(uintmax_t nb, t_flags *flags);
 void	ft_pf_putnbr(intmax_t n);
 int		ft_pf_intlen(intmax_t n);
+void    ft_percent(t_print *print, t_flags *flags);
+void    ft_unsigned_int(t_print *print, t_flags *flags);
 
 #endif

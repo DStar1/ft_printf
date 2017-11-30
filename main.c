@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 17:26:06 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/29 17:41:09 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/29 22:22:28 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int		main(void)
 	// printf("\npos = %d\n", ft_printf("\nmy name %dis and I am %06d years old!\n", -22, 2));
 	// printf("\npos = %d\n", printf("\nmy name %dis and I am %06d years old!\n", -22, 2));
 
-	printf("\npos = %d\n", ft_printf("%#8x", 42));
-	printf("\npos = %d\n", printf("%#8x", 42));
+	printf("\npos = %d\n", ft_printf("%hU", 4294967296));
+	printf("\npos = %d\n", printf("%hU", 4294967296));
 	//printf("\n-42 = %jd\n", -42);
 	//ft_puthex(-4294967296, 1);
 	//printf("\n%u\n", 0x80000000);
@@ -38,5 +38,6 @@ int		main(void)
 		
 	// while (1)
 	// 	; //leaks check
+
 	return (0);
 }

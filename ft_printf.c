@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 17:24:34 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/29 18:20:28 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/29 21:55:32 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@
 ** 
 */
 
+//watch oiut for something that has a 0 flag, but shouldn't print out any 0's
 void	fill(t_flags *flags, t_print *ptf, char c)
 {
 	int i;
@@ -83,30 +84,29 @@ int		ft_printf(char *fmt, ...)
 	ptf.i = 0;
 	while (ptf.fmt[ptf.i])
 	{
-		if (ptf.fmt[ptf.i] == '%')
+		if (ptf.fmt[ptf.i] != '%')
 		{
-			if (ptf.fmt[ptf.i + 1] && (ptf.fmt[ptf.i + 1] == '%'))
-			{
-				write(1, &ptf.fmt[ptf.i], 1);
-				ptf.i += 2;
-				ptf.ret += 2;
-			}
-			else
-			{
-				parse(&ptf, &flags);
-				//(ptf.fmt[ptf.i + 2]) ? ptf.ret += 1 : 0;
-			}
+			ft_putchar((ptf.fmt[ptf.i]));
+			ptf.ret++;
 		}
-		//else
-			//ptf.ret++;
+		else
+		{
+			parse(&ptf, &flags);
+			// if (ptf.fmt[ptf.i + 1] && (ptf.fmt[ptf.i + 1] == '%'))
+			// {
+			// 	if (neg)
+			// 	write(1, &ptf.fmt[ptf.i], 1);
+			// 	ptf.i += 2;
+			// 	ptf.ret += 2;
+			// }
+			// else
+			// {
+			// 	parse(&ptf, &flags);
+			// 	//(ptf.fmt[ptf.i + 2]) ? ptf.ret += 1 : 0;
+			// }
+		}
 		if (!ptf.fmt[ptf.i])
 			break ;
-		else //if (ptf.fmt[ptf.i] && ptf.fmt[ptf.i + 1])
-		{
-				ft_putchar((ptf.fmt[ptf.i]));
-				ptf.ret++;
-		}
-		
 		ptf.i++;
 	}
 	//printf("\n%d, res = %c\n", flags.zn, flags.res);

@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 19:05:59 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/29 18:38:08 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/29 22:14:05 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,24 @@ static void		apply_functs(t_print *ptf, t_flags *flags)
 	(flags->res == 'o') ? ft_octal(ptf, flags)/*printf("octal\n")*/ : 0;													//unfinished
 	(flags->res == 'O') ? printf("o with l mod\n") : 0;																		//unfinished
 	(flags->res == 'u') ? ft_unsigned_int(ptf, flags)/*printf("unsigned int\n")*/ : 0; 										//unfinished
-	(flags->res == 'U') ? printf("u with l mod\n") : 0;																		//unfinished
-	(flags->res == 'x') ? ft_hex(ptf, flags, 0)/*printf("hex lower case\n")*/ : 0; //ft_itoa_base(16) lowercase;										//working on
-	(flags->res == 'X') ? ft_hex(ptf, flags, 1)/*printf("hex upper case\n")*/ : 0; //ft_itoa_base(16) capital;										//working on
+	(flags->res == 'U') ? ft_unsigned_int(ptf, flags)/*printf("u with l mod\n")*/ : 0;																		//unfinished
+	(flags->res == 'x') ? ft_hex(ptf, flags, 0)/*printf("hex lower case\n")*/ : 0; //ft_itoa_base(16) lowercase;			//almost
+	(flags->res == 'X') ? ft_hex(ptf, flags, 1)/*printf("hex upper case\n")*/ : 0; //ft_itoa_base(16) capital;				//almost
 	(flags->res == 'c') ? ft_char(ptf, flags)/*printf("int converted to char\n")*/ : 0;										//finished
 	(flags->res == 'C') ? ft_l_char(ptf, flags)/*printf("c with l mod\n")*/ : 0;
-	(flags->res == '%') ? printf("perc with width\n") : 0;											//unfinished
+	(flags->res == '%') ? ft_percent(ptf, flags)/*printf("perc with width\n")*/ : 0;										//finished
 	//printf("flags: %d, %d, %d, %d, %d, %d\n", flags->perc, flags->hash, flags->neg, flags->pos, flags->space, flags->zero);
 	//printf("%d", printf("%#x", "hello"));
 }
 
 static void		set_flags(t_flags *flags)
 {
-	flags->hash = false;
-	flags->zero = false;
-	flags->space = false;
-	flags->neg = false;
-	flags->pos = false;
-	flags->perc = false;
+	flags->hash = 0;
+	flags->zero = 0;
+	flags->space = 0;
+	flags->neg = 0;
+	flags->pos = 0;
+	flags->perc = 0;
 	flags->width = 0;
 	flags->l = 0;
 	flags->ll = 0;
@@ -113,10 +113,7 @@ void			parse(t_print *ptf, t_flags *flags)
 	}
 	(ptf->fmt[ptf->i] && ft_isdigit(ptf->fmt[ptf->i])) ? set_width(flags, ptf) : 0;
 	if (ptf->fmt[ptf->i])
-	{
 		flags->res = ptf->fmt[ptf->i];
-		ptf->i++;
-	}
 	apply_functs(ptf, flags);
 	return ;
 }
