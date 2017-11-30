@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/28 20:53:44 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/29 18:32:02 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/29 18:33:25 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	data(t_print *print, t_flags *flags)
 		print->data.super_u = (unsigned int)va_arg(print->ap, unsigned short);
 	else if (flags->hh)
 		print->data.super_u = (unsigned int)va_arg(print->ap, unsigned char);
-	else if (flags->l)
-		print->data.super_u = va_arg(print->ap, unsigned long); //why not working?
-	else if (flags->ll){
-		print->data.super_u = va_arg(print->ap, unsigned long long); printf("in");}
+	else if (flags->l){
+		print->data.super_u = va_arg(print->ap, unsigned long); printf("in");}
+	else if (flags->ll)
+		print->data.super_u = va_arg(print->ap, unsigned long long);
 	else if (flags->j)
 		print->data.super_u = va_arg(print->ap, uintmax_t);
 	else if (flags->z)
