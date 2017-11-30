@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 21:00:43 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/28 20:52:56 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/29 19:05:32 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,18 @@
 
 void    ft_string(t_print *print, t_flags *flags)
 {
+	// if (flags->space && flags->width)
+	// 	fill(flags, print, ' ');
+	// else if (flags->space)
+	// {
+	// 	ft_putchar(' ');
+	// 	print->ret++;
+	// }
 	print->data.str = va_arg(print->ap, char *);
 	print->ret += ft_strlen(print->data.str);
 	ft_putstr(print->data.str);
+	// if (flags->space && flags->width)
+	// 	fill(flags, print, ' ');
 	return ;
 }
 

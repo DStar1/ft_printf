@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 19:05:59 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/29 16:25:49 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/29 18:38:08 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,9 @@ void			parse(t_print *ptf, t_flags *flags)
 		IF(ptf->fmt[ptf->i] == ' ', flags->space = j++);
 		//all_flags(flags, 1);
 		IF(ptf->fmt[ptf->i] == 'l', flags->l = mod++);
-		IFYZ(mod == 2, (flags->l = 0), (flags->ll = 1));
+		IFYZ(ptf->fmt[ptf->i] == 'l' && mod, (flags->l = 0), (flags->ll = 1));
 		IF(ptf->fmt[ptf->i] == 'h', flags->h = mod++);
-		IFYZ(mod == 2, (flags->h = 0), (flags->hh = 1));
+		IFYZ(ptf->fmt[ptf->i] == 'h' && mod, (flags->h = 0), (flags->hh = 1));
 		IF(ptf->fmt[ptf->i] == 'j', flags->j = mod++);
 		IF(ptf->fmt[ptf->i] == 'z', flags->z = mod++);
 

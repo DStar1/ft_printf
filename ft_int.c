@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/28 20:00:03 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/29 18:21:43 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/29 18:49:55 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void    ft_int(t_print *print, t_flags *flags)
 		flags->len++;
 	}
 	(print->data.super < 0) ? flags->intlen-- : 0;
-	ft_pf_putnbr(print->data.super); 															//changed all to this
+	ft_pf_putnbr(print->data.super);
 	//(print->data.super < 0) ? ft_putstr("2147483648") : ft_pf_putnbr(print->data.super);
 	(flags->neg > 0) ? fill(flags, print, ' ') : 0;
 	IFELSE((flags->width == 0), print->ret += flags->len + flags->intlen, print->ret += flags->width);
