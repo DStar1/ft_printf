@@ -1,43 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puthex.c                                        :+:      :+:    :+:   */
+/*   ft_pf_putnbr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/28 20:12:57 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/29 16:32:03 by hasmith          ###   ########.fr       */
+/*   Created: 2017/09/20 14:07:18 by hasmith           #+#    #+#             */
+/*   Updated: 2017/11/29 17:59:56 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void    ft_puthex(uintmax_t nb, t_print *print, int cap)
+void	ft_pf_putnbr(intmax_t n)
 {
-	if (nb < 16 && cap == 0)
+	// if (n == -2147483648)
+	// 	ft_putstr("-2147483648");
+	if (n < 0)
 	{
-		ft_putchar(HEX[nb]);
-		//print->ret++;
+		ft_putchar('-');
+		ft_putnbr(-n);
 	}
-	else if (nb < 16 && cap == 1)
+	else if (n >= 10)
 	{
-		ft_putchar(HEX[nb + 16]);
-		//print->ret++;
+		ft_putnbr(n / 10);
+		ft_putchar(n % 10 + '0');
 	}
 	else
-	{
-		ft_puthex(nb / 16, print, cap);
-		ft_puthex(nb % 16, print, cap);
-	}
-}
-
-void    ft_hexlen(uintmax_t nb, t_flags *flags)
-{
-	if (nb < 16)
-		flags->intlen++;
-	else
-	{
-		ft_hexlen(nb / 16, flags);
-		ft_hexlen(nb % 16, flags);
-	}
+		ft_putchar(n + '0');
 }

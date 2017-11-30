@@ -6,7 +6,7 @@
 #    By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/22 20:09:46 by hasmith           #+#    #+#              #
-#    Updated: 2017/11/28 23:55:27 by hasmith          ###   ########.fr        #
+#    Updated: 2017/11/29 17:59:08 by hasmith          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,6 +81,8 @@ PRINTF = 	parse.c \
 			ft_int.c \
 			ft_puthex.c \
 			ft_hex.c \
+			ft_pf_intlen.c \
+			ft_pf_putnbr.c \
 			ft_printf.c
 
 NAME = libftprintf.a
@@ -104,7 +106,8 @@ $(NAME):
 	ar rcs $(LIB) *.o
 	ar -x libft/libft.a
 	ar -x $(LIB)
-	ar rcs $(NAME) *.o
+	mv *.o obj
+	ar rcs $(NAME) obj/*.o
 	rm $(LIB) __.*
 
 cmain:

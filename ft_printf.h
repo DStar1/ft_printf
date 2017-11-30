@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 16:15:38 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/28 21:47:21 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/29 17:54:53 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,8 @@ void	fill(t_flags *flags, t_print *ptf, char c);
 void    ft_int(t_print *print, t_flags *flags);
 void    ft_puthex(uintmax_t nb, t_print *print, int cap);
 void    ft_hex(t_print *print, t_flags *flags, int cap);
+void    ft_hexlen(uintmax_t nb, t_flags *flags);
+void	ft_pf_putnbr(intmax_t n);
+int		ft_pf_intlen(intmax_t n);
 
 #endif

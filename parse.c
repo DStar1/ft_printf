@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 19:05:59 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/28 21:58:29 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/29 16:25:49 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 static void		apply_functs(t_print *ptf, t_flags *flags)
 {
 	//check_flags(flags); pass all flags to everyone
-	((flags->res == 's') || (flags->res == 'S')) ? ft_string(ptf, flags)/*printf("String\n")*/ : 0;							//finished
-	((flags->res == 'd') || (flags->res == 'i')) ? ft_int(ptf, flags)/*printf("int\n")*/ : 0;								//finished
+	((flags->res == 's') || (flags->res == 'S')) ? ft_string(ptf, flags)/*printf("String\n")*/ : 0;							//finished?
+	((flags->res == 'd') || (flags->res == 'i')) ? ft_int(ptf, flags)/*printf("int\n")*/ : 0;								//finished?
 	(flags->res == 'D') ? printf("i/d with l mod\n") : 0;																	//unfinished
 	(flags->res == 'p') ? printf("void * pointer printed in hex same as '%#x'\n") : 0;										//unfinished
 	(flags->res == 'o') ? ft_octal(ptf, flags)/*printf("octal\n")*/ : 0;													//unfinished
 	(flags->res == 'O') ? printf("o with l mod\n") : 0;																		//unfinished
 	(flags->res == 'u') ? ft_unsigned_int(ptf, flags)/*printf("unsigned int\n")*/ : 0; 										//unfinished
 	(flags->res == 'U') ? printf("u with l mod\n") : 0;																		//unfinished
-	(flags->res == 'x') ? ft_hex(ptf, flags, 0)/*printf("hex lower case\n")*/ : 0; //ft_itoa_base(16) lowercase;										//unfinished
-	(flags->res == 'X') ? ft_hex(ptf, flags, 0)/*printf("hex upper case\n")*/ : 0; //ft_itoa_base(16) capital;										//unfinished
+	(flags->res == 'x') ? ft_hex(ptf, flags, 0)/*printf("hex lower case\n")*/ : 0; //ft_itoa_base(16) lowercase;										//working on
+	(flags->res == 'X') ? ft_hex(ptf, flags, 1)/*printf("hex upper case\n")*/ : 0; //ft_itoa_base(16) capital;										//working on
 	(flags->res == 'c') ? ft_char(ptf, flags)/*printf("int converted to char\n")*/ : 0;										//finished
 	(flags->res == 'C') ? ft_l_char(ptf, flags)/*printf("c with l mod\n")*/ : 0;
 	(flags->res == '%') ? printf("perc with width\n") : 0;											//unfinished
