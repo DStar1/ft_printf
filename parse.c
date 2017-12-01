@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 19:05:59 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/30 20:23:57 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/30 20:37:31 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,5 +156,6 @@ void			parse(t_print *ptf, t_flags *flags)
 		else if (ptf->fmt[ptf->i])
 			apply_functs(ptf, flags);
 	}
+	
 	return ;
 }
