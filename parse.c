@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 19:05:59 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/29 22:14:05 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/30 20:23:57 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void		apply_functs(t_print *ptf, t_flags *flags)
 	((flags->res == 'd') || (flags->res == 'i')) ? ft_int(ptf, flags)/*printf("int\n")*/ : 0;								//finished?
 	(flags->res == 'D') ? printf("i/d with l mod\n") : 0;																	//unfinished
 	(flags->res == 'p') ? printf("void * pointer printed in hex same as '%#x'\n") : 0;										//unfinished
-	(flags->res == 'o') ? ft_octal(ptf, flags)/*printf("octal\n")*/ : 0;													//unfinished
+	(flags->res == 'o') ? ft_oct(ptf, flags, 0)/*printf("octal\n")*/ : 0;													//unfinished
 	(flags->res == 'O') ? printf("o with l mod\n") : 0;																		//unfinished
 	(flags->res == 'u') ? ft_unsigned_int(ptf, flags)/*printf("unsigned int\n")*/ : 0; 										//unfinished
 	(flags->res == 'U') ? ft_unsigned_int(ptf, flags)/*printf("u with l mod\n")*/ : 0;																		//unfinished
@@ -47,25 +47,31 @@ static void		set_flags(t_flags *flags)
 	flags->h = 0;
 	flags->j = 0;
 	flags->z = 0;
+	flags->p = 0;
+	flags->p1 = 0;
+	flags->p2 = 0;
+	flags->intlen = 0;
 	//flags->i = 0;
 }
 
 //void			check_flag()
 
-void			set_width(t_flags *flags, t_print *ptf)
+int			pf_atoi(t_flags *flags, t_print *ptf)
 {
 	int start;
+	int nb;
 
+	nb = 0;
 	start = ptf->i;
 	while (ptf->fmt[ptf->i] && ft_isdigit(ptf->fmt[ptf->i]))
 	{
-		flags->width += (ptf->fmt[ptf->i] - '0');
-		flags->width *= 10;
+		nb += (ptf->fmt[ptf->i] - '0');
+		nb *= 10;
 		ptf->i++;
 	}
 	if (ptf->i > start)
-		flags->width /= 10;
-	return ;
+		nb /= 10;
+	return (nb);
 }
 
 
@@ -101,19 +107,54 @@ void			parse(t_print *ptf, t_flags *flags)
 		IF(ptf->fmt[ptf->i] == '0', flags->zero = j++);
 		IF(ptf->fmt[ptf->i] == ' ', flags->space = j++);
 		//all_flags(flags, 1);
-		IF(ptf->fmt[ptf->i] == 'l', flags->l = mod++);
-		IFYZ(ptf->fmt[ptf->i] == 'l' && mod, (flags->l = 0), (flags->ll = 1));
-		IF(ptf->fmt[ptf->i] == 'h', flags->h = mod++);
-		IFYZ(ptf->fmt[ptf->i] == 'h' && mod, (flags->h = 0), (flags->hh = 1));
+		if (ptf->fmt[ptf->i] == 'l' && mod == 1)
+			flags->l = mod++;
+		else if (ptf->fmt[ptf->i] == 'l' && mod == 2)
+		BRACKETS((flags->l = 0), (flags->ll = 1));
+		if (ptf->fmt[ptf->i] == 'h' && mod == 1)
+			flags->h = mod++;
+		else if (ptf->fmt[ptf->i] == 'h' && mod == 2)
+		BRACKETS((flags->h = 0), (flags->hh = 1));
 		IF(ptf->fmt[ptf->i] == 'j', flags->j = mod++);
 		IF(ptf->fmt[ptf->i] == 'z', flags->z = mod++);
-
 		//printf("flag = %c perc = %d\n", ptf->fmt[ptf->i], flags->space);
 		ptf->i++;
 	}
-	(ptf->fmt[ptf->i] && ft_isdigit(ptf->fmt[ptf->i])) ? set_width(flags, ptf) : 0;
+
+		//set p2 to the width if it is an int
+	if ((ptf->fmt[ptf->i]))// && ft_isdigit(ptf->fmt[ptf->i])) || ptf->fmt[ptf->i] == '.')
+	{
+		//if (ft_isdigit(ptf->fmt[ptf->i])) && ptf->fmt[ptf->i + 1] != '.')
+		if (ptf->fmt[ptf->i] && ft_isdigit(ptf->fmt[ptf->i]))
+			flags->width = pf_atoi(flags, ptf);
+		// if (ptf->fmt[ptf->i] && ptf->fmt[ptf->i + 1] && ft_isdigit(ptf->fmt[ptf->i]) && ptf->fmt[ptf->i + 1] == '.')
+		// 	flags->p1 = pf_atoi(flags, ptf);
+		if (ptf->fmt[ptf->i] && ptf->fmt[ptf->i + 1] && ft_isdigit(ptf->fmt[ptf->i + 1]) && ptf->fmt[ptf->i] == '.')
+			BRACKETS(ptf->i++, (flags->p = 1) && (flags->p2 = pf_atoi(flags, ptf)));
+			//printf("\n\nptf->i:%d, p2:%d char:%c\n\n", ptf->i, flags->p2, ptf->fmt[ptf->i]);
+		IF(ptf->fmt[ptf->i] && ptf->fmt[ptf->i] == '.', (flags->p = 1 && ptf->i++));
+		//IF(flags->p == 1 && flags->p2 == 0), 
+		// if (ptf->fmt[ptf->i] && ft_isdigit(ptf->fmt[ptf->i]))
+		// 	flags->width = pf_atoi(flags, ptf);
+	}
+	//printf("\norder:%d, p:%d, p1:%d, p2:%d\n", ptf->i, flags->p, flags->p1, flags->p2);
 	if (ptf->fmt[ptf->i])
+	{
 		flags->res = ptf->fmt[ptf->i];
-	apply_functs(ptf, flags);
+		// if ((flags->res != 'o' && !flags->hash))
+		// {
+			if (ptf->fmt[ptf->i] && !flags->width && flags->p == 1 && flags->p2 == 0)
+				;
+			else if (ptf->fmt[ptf->i] && flags->p == 1 && !flags->width && flags->p2 == 0)
+				;
+			else if (ptf->fmt[ptf->i] && flags->p == 1 && flags->width && flags->p2 == 0)
+			{
+				fill(flags, ptf, ' ');
+				ptf->ret += flags->width;
+			}
+		// }
+		else if (ptf->fmt[ptf->i])
+			apply_functs(ptf, flags);
+	}
 	return ;
 }

@@ -1,31 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pf_putnbr.c                                     :+:      :+:    :+:   */
+/*   ft_putoct.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/20 14:07:18 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/30 16:44:18 by hasmith          ###   ########.fr       */
+/*   Created: 2017/11/28 20:12:57 by hasmith           #+#    #+#             */
+/*   Updated: 2017/11/30 16:44:40 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_pf_putnbr(uintmax_t n)
+void    ft_putoct(uintmax_t nb, t_print *print, int cap)
 {
-	// if (n == -9223372036854775808) //possibly make <=
-	// 	ft_putstr("-9223372036854775808");
-	if (n < 0)
+	if (nb < 8 && cap == 0)
 	{
-		ft_putchar('-');
-		ft_pf_putnbr(-n);
+		ft_putchar(OCT[nb]);
+		//print->ret++;
 	}
-	else if (n >= 10)
+	else if (nb < 16 && cap == 1)
 	{
-		ft_pf_putnbr(n / 10);
-		ft_putchar(n % 10 + '0');
+		ft_putchar(OCT[nb + 8]);
+		//print->ret++;
 	}
 	else
-		ft_putchar(n + '0');
+	{
+		ft_putoct(nb / 8, print, cap);
+		ft_putoct(nb % 8, print, cap);
+	}
+}
+
+void    ft_octlen(uintmax_t nb, t_flags *flags)
+{
+	if (nb < 8)
+		flags->intlen++;
+	else
+	{
+		ft_octlen(nb / 8, flags);
+		ft_octlen(nb % 8, flags);
+	}
 }

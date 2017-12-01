@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 21:00:43 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/29 22:09:27 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/30 19:00:42 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void    ft_string(t_print *print, t_flags *flags)
 {
 	print->data.str = va_arg(print->ap, char *);
 	IF(print->data.str == NULL, print->data.str = "(null)");
+	IF(flags->p2, print->data.str = ft_strsub(print->data.str, 0, flags->p2));
 	flags->intlen = ft_strlen(print->data.str);
 	if (flags->width)
 	{

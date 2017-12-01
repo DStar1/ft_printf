@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 01:06:30 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/29 17:54:45 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/30 16:44:26 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@
 
 #include "ft_printf.h"
 
-int		ft_pf_intlen(intmax_t n)
+int		ft_pf_intlen(uintmax_t n)
 {
-	unsigned int	len;
+	uintmax_t	len;
 
 	if (n == 0)
 		return (1);
 	len = (n < 0) ? 1 : 0;
+	if (n == -9223372036854775808)
+		len++;
 	while (n)
 	{
 		n /= 10;

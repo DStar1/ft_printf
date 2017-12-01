@@ -6,7 +6,7 @@
 #    By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/22 20:09:46 by hasmith           #+#    #+#              #
-#    Updated: 2017/11/29 22:34:48 by hasmith          ###   ########.fr        #
+#    Updated: 2017/11/30 14:36:47 by hasmith          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,6 +85,8 @@ PRINTF = 	parse.c \
 			ft_pf_putnbr.c \
 			ft_percent.c \
 			ft_unsigned_int.c \
+			ft_oct.c \
+			ft_putoct.c \
 			ft_printf.c
 
 NAME = libftprintf.a

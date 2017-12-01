@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 17:24:34 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/29 21:55:32 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/30 17:50:57 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,18 +92,6 @@ int		ft_printf(char *fmt, ...)
 		else
 		{
 			parse(&ptf, &flags);
-			// if (ptf.fmt[ptf.i + 1] && (ptf.fmt[ptf.i + 1] == '%'))
-			// {
-			// 	if (neg)
-			// 	write(1, &ptf.fmt[ptf.i], 1);
-			// 	ptf.i += 2;
-			// 	ptf.ret += 2;
-			// }
-			// else
-			// {
-			// 	parse(&ptf, &flags);
-			// 	//(ptf.fmt[ptf.i + 2]) ? ptf.ret += 1 : 0;
-			// }
 		}
 		if (!ptf.fmt[ptf.i])
 			break ;

@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 16:15:38 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/29 22:01:32 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/30 19:10:17 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdarg.h>
 
 #define HEX "0123456789abcdef0123456789ABCDEF"
+#define OCT "0123456701234567"
 
 typedef union
 {
@@ -67,6 +68,9 @@ typedef struct		s_flags
 	int			hh;
 	int			j;
 	int			z;
+	int			p;
+	int			p1;
+	int			p2;
 	char			res;
 	int				i;
 }					t_flags;
@@ -92,9 +96,11 @@ void    ft_int(t_print *print, t_flags *flags);
 void    ft_puthex(uintmax_t nb, t_print *print, int cap);
 void    ft_hex(t_print *print, t_flags *flags, int cap);
 void    ft_hexlen(uintmax_t nb, t_flags *flags);
-void	ft_pf_putnbr(intmax_t n);
-int		ft_pf_intlen(intmax_t n);
+void	ft_pf_putnbr(uintmax_t n);
+int		ft_pf_intlen(uintmax_t n);
 void    ft_percent(t_print *print, t_flags *flags);
 void    ft_unsigned_int(t_print *print, t_flags *flags);
+void	ft_oct(t_print *print, t_flags *flags, int cap);
+void    ft_putoct(uintmax_t nb, t_print *print, int cap);
 
 #endif
