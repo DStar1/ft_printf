@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 17:24:34 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/30 17:50:57 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/11/30 23:45:41 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ void	fill(t_flags *flags, t_print *ptf, char c)
 {
 	int i;
 	//char c;
-	int nb;
+	//int nb;
 
 	i = 0;
-	nb = 0;
+	//nb = 0;
 	//c = ' ';
 	if (!flags->neg && flags->zero > flags->neg) //sort the priority here
 		c = '0';
