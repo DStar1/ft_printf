@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 19:05:59 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/30 20:37:31 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/12/02 18:17:20 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,17 +143,21 @@ void			parse(t_print *ptf, t_flags *flags)
 		flags->res = ptf->fmt[ptf->i];
 		// if ((flags->res != 'o' && !flags->hash))
 		// {
-			if (ptf->fmt[ptf->i] && !flags->width && flags->p == 1 && flags->p2 == 0)
-				;
-			else if (ptf->fmt[ptf->i] && flags->p == 1 && !flags->width && flags->p2 == 0)
-				;
-			else if (ptf->fmt[ptf->i] && flags->p == 1 && flags->width && flags->p2 == 0)
-			{
-				fill(flags, ptf, ' ');
-				ptf->ret += flags->width;
-			}
+			// if (ptf->fmt[ptf->i] && !flags->width && flags->p == 1 && flags->p2 == 0)
+			// 	;
+			// else if (ptf->fmt[ptf->i] && !flags->width && flags->p == 1 && flags->p2 == 0)
+			// 	;
+			// else if (ptf->fmt[ptf->i] && flags->p == 1 && !flags->width && flags->p2 == 0)
+			// 	;
+			// else if (ptf->fmt[ptf->i] && flags->p == 1 && flags->width && flags->p2 == 0)
+			// {
+
+			// 	fill(flags, ptf, ' '); //fill_space(flags, ptf, ' ', flags->width);
+			// 	ptf->ret += flags->width;
+			// }
 		// }
-		else if (ptf->fmt[ptf->i])
+		// else 
+		if (ptf->fmt[ptf->i])
 			apply_functs(ptf, flags);
 	}
 	

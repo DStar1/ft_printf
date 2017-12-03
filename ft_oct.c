@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/28 20:53:44 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/30 16:44:30 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/12/02 19:40:02 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,18 @@ void	oct_data(t_print *print, t_flags *flags)
 		print->data.super_u = va_arg(print->ap, unsigned int); //possibly change to uintmax_t
 }
 
+void	fill_space(t_print *print, t_flags *flags, char c, int len)
+{
+	int i;
+
+	i = 0;
+	while (i < len)
+	{
+		ft_putchar(c);
+		i++;
+	}
+}
+
 void	ft_oct(t_print *print, t_flags *flags, int cap)
 {
 	flags->intlen = 0;
@@ -37,30 +49,77 @@ void	ft_oct(t_print *print, t_flags *flags, int cap)
 	//ft_puthex(9223372036854775807, print, cap);
 	//print->data.i = va_arg(print->ap, uintmax_t);
 	ft_octlen(print->data.super_u, flags);
+	
+	(flags->p2 > flags->width) ? flags->width = flags->p2 : 0;
+	(flags->intlen > flags->width) ? flags->width = flags->intlen : 0;
+int tmp = flags->width;
 	//IF(print->data.super_u, flags->zero = 0);
 	IF(flags->neg, flags->zero = 0);
 	if (flags->neg || flags->zero)
 	{
-		if (flags->hash && print->data.super_u != 0)
+		if (flags->p2) //added
 		{
-			ft_putchar('0');
-			flags->intlen++;
+			if (flags->p2 > flags->intlen)
+				fill_space(print, flags, '0', flags->p2 - flags->intlen);
+			if (flags->p && print->data.super_u == 0)
+			{
+				//IFELSE(!flags->hash, (ft_putchar(' ')) && (print->ret--), flags->intlen--);
+			}
+			else
+				ft_putoct(print->data.super_u, print, cap);
+			(flags->intlen < flags->width) ? fill_space(print, flags, ' ', flags->width - flags->p2) : 0;
 		}
-		if (flags->zero)
-			fill(flags, print, '0');
-		ft_putoct(print->data.super_u, print, cap); //add the is capital/double/more
-		if (!flags->zero)
-			fill(flags, print, ' ');
+		else
+		{
+			if (flags->hash)// && print->data.super_u != 0)
+			{
+				ft_putchar('0');
+				flags->intlen++; 
+			}
+			if (flags->zero)
+				fill(flags, print, '0');
+			if (flags->p && print->data.super_u == 0)
+			{
+				//IFELSE(!flags->hash, (ft_putchar(' ')) && (print->ret--), flags->intlen--);
+			}
+			else
+				ft_putoct(print->data.super_u, print, cap);
+			if (!flags->zero)
+				fill(flags, print, ' ');
+		}
 	}
 	else
 	{
-		(flags->hash && print->data.super_u != 0) ? flags->intlen++ : 0;
-		fill(flags, print, ' ');
-		if (flags->hash && print->data.super_u != 0)
-			ft_putchar('0');
-		ft_putoct(print->data.super_u, print, cap);
+		if (flags->p2) //added
+		{
+			(flags->intlen < flags->width) ? fill_space(print, flags, ' ', flags->width - flags->p2) : 0;
+			if (flags->p2 > flags->intlen)
+				fill_space(print, flags, '0', flags->p2 - flags->intlen);
+			if (flags->p && print->data.super_u == 0)
+			{
+				//IFELSE(!flags->hash, (ft_putchar(' ')) && (print->ret--), flags->intlen--);
+			}
+			else
+				ft_putoct(print->data.super_u, print, cap);
+			
+		}
+		else
+		{
+			(flags->hash)/* && print->data.super_u != 0)*/ ? flags->intlen++ : 0;
+			fill(flags, print, ' ');
+			if (flags->hash)// && print->data.super_u != 0)
+				{ft_putchar('0');flags->intlen++;}
+			if (flags->p && print->data.super_u == 0)
+			{
+				//IFELSE(!flags->hash, (ft_putchar(' ')) && (print->ret--), flags->intlen--);
+			}
+			else
+				ft_putoct(print->data.super_u, print, cap);
+		}
 	}
+	flags->width = tmp;
 	IF(flags->width < flags->intlen, flags->width = flags->intlen);
 
 	IFELSE((flags->width == 0), print->ret += flags->intlen, print->ret += flags->width);
+	//(flags->p && print->data.super_u == 0) ? print->ret-- : 0;
 }

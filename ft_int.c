@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/28 20:00:03 by hasmith           #+#    #+#             */
-/*   Updated: 2017/12/01 01:23:13 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/12/01 01:28:55 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void    ft_int(t_print *print, t_flags *flags)
 	neg = 1;
     flags->intlen = 0;
 	int_data(print, flags);
-	(flags->p2) ? flags->zero = 0 : 0; //take out to get different result
+	//(flags->p2) ? flags->zero = 0 : 0; //take out to get different result
 	if (print->data.super < 0)
 	{
 		print->data.super *= -1;

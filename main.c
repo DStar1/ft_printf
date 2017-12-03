@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 17:26:06 by hasmith           #+#    #+#             */
-/*   Updated: 2017/12/01 01:17:39 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/12/02 20:04:19 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ int		main(void)
 	// printf("\npos = %d\n", ft_printf("\nmy name %dis and I am %06d years old!\n", -22, 2));
 	// printf("\npos = %d\n", printf("\nmy name %dis and I am %06d years old!\n", -22, 2));
 
-	printf("\npos = %d\n", ft_printf("%0+5d", 42));
-	printf("\npos = %d\n", printf("%0+5d", 42));
+	printf("\npos = %d\n", ft_printf("@moulitest: %-16o", -42)); //"@moulitest: %-16.o", 42 doesn't work because of how i check for precision'
+	printf("\npos = %d\n", printf("@moulitest: %-16o", -42));
 
+// ft_printf("%#s%s", "hello", "hi");
 	// printf("\npos = %d\n", ft_printf("%-+10.5d", 4242));
 	// printf("\npos = %d\n", printf("%-+10.5d", 4242));
 	
