@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/28 20:00:03 by hasmith           #+#    #+#             */
-/*   Updated: 2017/12/01 01:28:55 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/12/03 18:21:54 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,21 +67,27 @@ void    ft_int(t_print *print, t_flags *flags)
 	neg = 1;
     flags->intlen = 0;
 	int_data(print, flags);
+	if (check_zero(print, flags, print->data.super_u) != 0)
+		return ;
+	if (flags->p2)
+		flags->zero = 0;
 	//(flags->p2) ? flags->zero = 0 : 0; //take out to get different result
+
 	if (print->data.super < 0)
 	{
 		print->data.super *= -1;
 		neg = -1;
 		flags->intlen = 1;
+		(flags->p2 + 1 <= flags->width) ? flags->p2++ : 0; //&& flags->intlen = 1 
 		//(flags->p2 < flags->width) ? flags->intlen = 1 : 0;
 	}
-	(flags->pos && neg != -1) ? flags->intlen+=2 : 0;
+	//(flags->pos && neg != -1) ? flags->intlen+=2 : 0;
 	flags->intlen = flags->intlen + ft_pf_intlen(print->data.super);
 	// int tmp = flags->intlen;
 	// (flags->p2 > flags->intlen) ? flags->intlen += (flags->width - flags->p2) : 0;
 
 	IF(flags->width && flags->p2 > flags->width && neg == -1, flags->intlen--);
-	IF(flags->width && (flags->p2 > flags->width), (flags->width = flags->p2 && flags->zero++));
+	IF(flags->p2 > flags->intlen && (flags->p2 > flags->width), (flags->width = flags->p2 && flags->zero++));
 	
 	if (neg == -1 && flags->zero) //manipulate these for changes
 		ft_putchar('-');
@@ -93,6 +99,7 @@ void    ft_int(t_print *print, t_flags *flags)
 	}
 	int intlen = flags->intlen;
 	(flags->p2 > flags->intlen) ? flags->intlen = flags->p2 : 0;
+	(neg != -1 && flags->pos && !flags->zero && flags->p2) ? flags->intlen++ : 0; //maybe add the inlen earlier for the positive
 	(flags->neg == 0) ? fill(flags, print, ' ') : 0;
 	(flags->p2 > intlen) ? flags->intlen = intlen : 0;
 	if (flags->space && !flags->pos && !flags->zero && neg == 1)
@@ -108,10 +115,11 @@ void    ft_int(t_print *print, t_flags *flags)
 	else if (flags->pos && !flags->zero) //manipulate these for changes
 	{
 		ft_putchar('+');
-		//flags->len++;
-		(flags->p2 < flags->intlen) ? flags->len++ : 0;
+		flags->len++;
+		//printf("in\n");
+		//(flags->p2 < flags->intlen) ? flags->len++ : 0;
 	}
-	(flags->pos && neg != -1) ? flags->intlen-=2 : 0;
+	//(flags->pos && neg != -1) ? flags->intlen-=2 : 0;
 	((flags->p2 > flags->width && neg == -1)) ? (flags->intlen--) : 0;
 	(flags->p2) ? fill_p2(flags, print) : 0;
 	(print->data.super < 0) ? flags->intlen-- : 0;

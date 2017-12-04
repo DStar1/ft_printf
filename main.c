@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 17:26:06 by hasmith           #+#    #+#             */
-/*   Updated: 2017/12/02 20:04:19 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/12/03 19:00:20 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,11 @@ int		main(void)
 	// printf("\npos = %d\n", ft_printf("\nmy name %dis and I am %06d years old!\n", -22, 2));
 	// printf("\npos = %d\n", printf("\nmy name %dis and I am %06d years old!\n", -22, 2));
 
-	printf("\npos = %d\n", ft_printf("@moulitest: %-16o", -42)); //"@moulitest: %-16.o", 42 doesn't work because of how i check for precision'
-	printf("\npos = %d\n", printf("@moulitest: %-16o", -42));
+	printf("\npos = %d\n", ft_printf("@moulitest: %10.5u", 42)); //"@moulitest: %-16.o", 42 doesn't work because of how i check for precision'
+	printf("\npos = %d\n", printf("@moulitest: %10.5u", 42));
+
+	// printf("\npos = %d\n", ft_printf("%05d", -42)); //"@moulitest: %-16.o", 42 doesn't work because of how i check for precision'
+	// printf("\npos = %d\n", printf("%05d", -42));
 
 // ft_printf("%#s%s", "hello", "hi");
 	// printf("\npos = %d\n", ft_printf("%-+10.5d", 4242));

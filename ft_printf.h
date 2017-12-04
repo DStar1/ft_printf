@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 16:15:38 by hasmith           #+#    #+#             */
-/*   Updated: 2017/12/02 17:56:49 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/12/03 17:15:04 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,6 @@ void    ft_unsigned_int(t_print *print, t_flags *flags);
 void	ft_oct(t_print *print, t_flags *flags, int cap);
 void    ft_putoct(uintmax_t nb, t_print *print, int cap);
 void	fill_space(t_print *print, t_flags *flags, char c, int len);
+int		check_zero(t_print *print, t_flags *flags, uintmax_t res);
 
 #endif

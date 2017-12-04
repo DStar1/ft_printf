@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 22:00:52 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/29 22:33:10 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/12/03 18:54:11 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,41 @@ void    ft_unsigned_int(t_print *print, t_flags *flags) //add casting for va_arg
 	u_data(print, flags);
 	//IF(flags->res == 'U', print->data.super_u = (unsigned long)print->data.super_u);
 	flags->intlen = ft_pf_intlen(print->data.super_u);
-	if (flags->width)
+	if (flags->width || flags->p2 > flags->width)
 	{
-		if (flags->neg)
-		{
-			ft_pf_putnbr(print->data.super_u);
-			fill(flags, print, ' ');
-		}
-		else
-		{
-			fill(flags, print, ' ');
-			ft_pf_putnbr(print->data.super_u);
-		}
+
+			if (flags->neg)
+			{
+				if (flags->p2) //added
+				{
+					if (flags->p2 > flags->intlen)
+						fill_space(print, flags, '0', flags->p2 - flags->intlen);
+					ft_pf_putnbr(print->data.super_u);
+					(flags->intlen < flags->width) ? fill_space(print, flags, ' ', flags->width - flags->p2) : 0;
+				}
+				else
+				{
+					ft_pf_putnbr(print->data.super_u);
+					fill(flags, print, ' ');
+				}
+			}
+			else
+			{
+				if (flags->p2) //added
+				{
+					(flags->intlen < flags->width) ? fill_space(print, flags, ' ', flags->width - flags->p2) : 0;
+					if (flags->p2 > flags->intlen)
+						fill_space(print, flags, '0', flags->p2 - flags->intlen);
+					ft_pf_putnbr(print->data.super_u);
+				}
+				else
+				{
+					fill(flags, print, ' ');
+					ft_pf_putnbr(print->data.super_u);
+				}
+			}
 		IF(flags->intlen > flags->width, flags->width = flags->intlen);
+		IF(flags->p2 > flags->width, flags->width = flags->p2);
 		print->ret += flags->width;
 	}
 	else

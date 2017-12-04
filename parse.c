@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 19:05:59 by hasmith           #+#    #+#             */
-/*   Updated: 2017/12/02 20:42:11 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/12/03 18:55:58 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 static void		apply_functs(t_print *ptf, t_flags *flags)
 {
 	//check_flags(flags); pass all flags to everyone
-	((flags->res == 's') || (flags->res == 'S')) ? ft_string(ptf, flags)/*printf("String\n")*/ : 0;							//finished?
-	((flags->res == 'd') || (flags->res == 'i')) ? ft_int(ptf, flags)/*printf("int\n")*/ : 0;								//finished?
+	((flags->res == 's') || (flags->res == 'S')) ? ft_string(ptf, flags) : 0;							//finished?
+	((flags->res == 'd') || (flags->res == 'i')) ? ft_int(ptf, flags) : 0;								//finished?
 	(flags->res == 'D') ? printf("i/d with l mod\n") : 0;																	//unfinished
 	(flags->res == 'p') ? printf("void * pointer printed in hex same as '%#x'\n") : 0;										//unfinished
-	(flags->res == 'o') ? ft_oct(ptf, flags, 0)/*printf("octal\n")*/ : 0;													//unfinished
+	(flags->res == 'o') ? ft_oct(ptf, flags, 0) : 0;													//unfinished
 	(flags->res == 'O') ? printf("o with l mod\n") : 0;																		//unfinished
-	(flags->res == 'u') ? ft_unsigned_int(ptf, flags)/*printf("unsigned int\n")*/ : 0; 										//unfinished
+	(flags->res == 'u') ? ft_unsigned_int(ptf, flags) : 0; 										//unfinished
 	(flags->res == 'U') ? ft_unsigned_int(ptf, flags)/*printf("u with l mod\n")*/ : 0;																		//unfinished
-	(flags->res == 'x') ? ft_hex(ptf, flags, 0)/*printf("hex lower case\n")*/ : 0; //ft_itoa_base(16) lowercase;			//almost
-	(flags->res == 'X') ? ft_hex(ptf, flags, 1)/*printf("hex upper case\n")*/ : 0; //ft_itoa_base(16) capital;				//almost
-	(flags->res == 'c') ? ft_char(ptf, flags)/*printf("int converted to char\n")*/ : 0;										//finished
+	(flags->res == 'x') ? ft_hex(ptf, flags, 0) : 0; //ft_itoa_base(16) lowercase;			//almost
+	(flags->res == 'X') ? ft_hex(ptf, flags, 1) : 0; //ft_itoa_base(16) capital;				//almost
+	(flags->res == 'c') ? ft_char(ptf, flags) : 0;										//finished
 	(flags->res == 'C') ? ft_l_char(ptf, flags)/*printf("c with l mod\n")*/ : 0;
-	(flags->res == '%') ? ft_percent(ptf, flags)/*printf("perc with width\n")*/ : 0;										//finished
+	(flags->res == '%') ? ft_percent(ptf, flags) : 0;										//finished
 	//printf("flags: %d, %d, %d, %d, %d, %d\n", flags->perc, flags->hash, flags->neg, flags->pos, flags->space, flags->zero);
 	//printf("%d", printf("%#x", "hello"));
 }
@@ -86,6 +86,23 @@ int	check_flags(t_flags *flags, t_print *ptf)
 	if (ptf->fmt[ptf->i] == 'l' || ptf->fmt[ptf->i] == 'h' ||
 		ptf->fmt[ptf->i] == 'j' || ptf->fmt[ptf->i] == 'z')
 		return 1;
+	return (0);
+}
+
+
+int		res_flags(t_flags *flags, t_print *print)
+{
+	if ((flags->res == 's') || (flags->res == 'S'))
+		return (1);
+	else if ((flags->res == 'd') || (flags->res == 'i') || (flags->res == 'D')
+	|| (flags->res == 'o') || (flags->res == 'O') || (flags->res == 'u')
+	|| (flags->res == 'U'))
+		return (2);
+	else if ((flags->res == 'x') || (flags->res == 'X'))
+		return (3);
+	else if ((flags->res == 'p') || (flags->res == 'c') || (flags->res == 'C')
+	|| (flags->res == '%'))
+		return (4);
 	return (0);
 }
 
@@ -156,6 +173,15 @@ void			parse(t_print *ptf, t_flags *flags)
 			// 	ptf->ret += flags->width;
 			// }
 		// }
+		// else 
+
+
+
+		// if (res_flags(flags, ptf) == 2) // digits
+		// {
+
+		// }
+		// if (res_flags(flags, ptf) == 1) //strings
 		// else 
 		if (ptf->fmt[ptf->i])
 			apply_functs(ptf, flags);

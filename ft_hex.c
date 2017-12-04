@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/28 20:53:44 by hasmith           #+#    #+#             */
-/*   Updated: 2017/11/30 16:44:33 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/12/03 17:15:46 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	ft_hex(t_print *print, t_flags *flags, int cap)
 	data(print, flags);
 	//ft_puthex(9223372036854775807, print, cap);
 	//print->data.i = va_arg(print->ap, uintmax_t);
+	if (check_zero(print, flags, print->data.super_u) != 0)
+		return ;
 	ft_hexlen(print->data.super_u, flags);
 	//IF(print->data.super_u, flags->zero = 0);
 	IF(flags->neg, flags->zero = 0);
