@@ -6,7 +6,7 @@
 #    By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/22 20:09:46 by hasmith           #+#    #+#              #
-#    Updated: 2017/12/08 19:48:51 by hasmith          ###   ########.fr        #
+#    Updated: 2017/12/08 19:55:28 by hasmith          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -134,8 +134,6 @@ rhe: fclean H
 
 git:
 	make fclean
-	mv main.c obj
 	git add *
 	git commit -m '$(GIT)'
 	git push
-	mv obj/main.c .

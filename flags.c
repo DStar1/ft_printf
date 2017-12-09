@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 19:05:30 by hasmith           #+#    #+#             */
-/*   Updated: 2017/12/08 19:22:38 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/12/08 19:55:05 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int				res_flags(char c)
 	else if ((c == 'p') || (c == 'c') || (c == 'C')
 	|| (c == '%'))
 		return (4);
-	else if (c == 'b')
+	else if (c == 'b' || c == 'n')
 		return (5);
 	return (0);
 }
