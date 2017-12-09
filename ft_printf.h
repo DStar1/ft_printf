@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 16:15:38 by hasmith           #+#    #+#             */
-/*   Updated: 2017/12/08 19:47:13 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/12/08 20:08:45 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,19 @@
 
 # define HEX "0123456789abcdef0123456789ABCDEF"
 # define OCT "0123456701234567"
+
+/*
+** define colors:
+** ft_printf(RED"\nhello"EOC" to all\n");
+*/
+
+# define RED     "\x1b[31m"
+# define GREEN   "\x1b[32m"
+# define YELLOW  "\x1b[33m"
+# define BLUE    "\x1b[34m"
+# define MAGENTA "\x1b[35m"
+# define CYAN    "\x1b[36m"
+# define EOC     "\x1b[0m"
 
 typedef union
 {
