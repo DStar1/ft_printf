@@ -6,16 +6,16 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 19:42:07 by hasmith           #+#    #+#             */
-/*   Updated: 2017/12/08 19:49:58 by hasmith          ###   ########.fr       */
+/*   Updated: 2017/12/08 19:56:49 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void    ft_n(t_print *print)
+void	ft_n(t_print *print)
 {
-    int *ptr;
+	int *ptr;
 
-    ptr = va_arg(print->ap, int*);
-    *ptr = print->ret;
+	ptr = va_arg(print->ap, int*);
+	*ptr = print->ret;
 }
